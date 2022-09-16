@@ -18,16 +18,6 @@ namespace Task4SmartDataDrivenKPC.Base
             LogStep(stepInfo, stepType: "Assertion");
         }
 
-        protected void LogPrecondition([CallerMemberName] string stepInfo = "")
-        {
-            LogStep(stepInfo, stepType: "Precondition");
-        }
-
-        protected void LogError(string description, Exception exception)
-        {
-            Logger.Fatal($"Fatal: {description}", exception);
-        }
-
         private void LogStep(string stepInfo, string stepType)
         {
             var shift = new string('#', 10);

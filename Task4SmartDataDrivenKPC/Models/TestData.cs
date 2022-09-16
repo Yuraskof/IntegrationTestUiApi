@@ -3,6 +3,5 @@
     public class TestData
     {
         public string Url { get; set; }
-
     }
 }

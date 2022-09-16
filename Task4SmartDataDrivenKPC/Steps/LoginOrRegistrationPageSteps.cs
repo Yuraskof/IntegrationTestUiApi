@@ -1,9 +1,9 @@
 ﻿using Task4SmartDataDrivenKPC.Base;
 using Task4SmartDataDrivenKPC.Constants;
+using Task4SmartDataDrivenKPC.Extensions;
 using Task4SmartDataDrivenKPC.Forms.Pages;
 using Task4SmartDataDrivenKPC.Models;
 using Task4SmartDataDrivenKPC.Utilities;
-using Test.Web.Extensions;
 
 namespace Task4SmartDataDrivenKPC.Steps
 {
@@ -32,13 +32,13 @@ namespace Task4SmartDataDrivenKPC.Steps
 
         public void SetUserEmail(string userName)
         {
-            LogStep(nameof(SetUserEmail) + $"Input user email - [{userName}]");
+            LogStep(nameof(SetUserEmail) + $" - [{userName}]");
             loginOrRegistrationPage.SetUserEmail(userName);
         }
 
         public void SetPassword(string password)
         {
-            LogStep(nameof(SetPassword) + $"Input password - [{password}]");
+            LogStep(nameof(SetPassword) + $" - [{password}]");
             loginOrRegistrationPage.SetPassword(password);
         }
 

@@ -9,46 +9,22 @@ namespace Task4SmartDataDrivenKPC.Models
 
         public string OperatingSystem { get; set; }
         public string ProductName { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-
-            ProductModel other = (ProductModel)obj;
-
-            if (OperatingSystem.Equals(other.OperatingSystem) && ProductName.Equals(other.ProductName))
-            {
-                Logger.Info("User models are equal");
-                return true;
-            }
-            Logger.Error("User models aren't  equal");
-            return false;
-        }
-
+        
         public static ProductModel CreateModel(string key)
         {
+            Logger.Info(string.Format("Model {0} created", key));
             FileReader.GetProductInfo(key);
             ProductModel model = new ProductModel();
-            model.SetModelFieldsFromTestData();
+            model.SetModelFieldsFromTestData(key);
             return model;
         }
 
-        public void SetModelFieldsFromTestData()
+        public void SetModelFieldsFromTestData(string key)
         {
-            Logger.Info("Set product model fields");
+            Logger.Info(string.Format("Set {0} model fields", key));
 
             OperatingSystem = FileReader.ProductInfo["OperatingSystem"];
             ProductName = FileReader.ProductInfo["ProductName"];
-        }
-
-        public void SetUserModelFromTextFields(string info, ProductModel model) 
-        {
-            //List<string> userInfo = StringUtil.GetSeparateddStrings(info, "\r\n");
-
-            // if link contains "Download", тема содержит "OS" "Name"
-            OperatingSystem = model.OperatingSystem; // else null
-            ProductName = model.ProductName;
         }
     }
 }

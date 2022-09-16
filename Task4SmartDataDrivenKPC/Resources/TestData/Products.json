@@ -1,5 +1,22 @@
 {
-  "Product1": "Windows\t Security Cloud ",
-  "Product2": "Mac\t Security Cloud ",
-  "Product3": "Windows\t Total Security "
+  "Product1": "Windows\tSecurity Cloud",
+  "Product2": "Windows\tTotal Security",
+  "Product3": "Windows\tInternet Security",
+  "Product4": "Windows\tAnti-Virus",
+  "Product5": "Windows\tVPN Secure Connection",
+  "Product6": "Windows\tPassword Manager",
+  "Product7": "Windows\tKaspersky Safe Kids",
+  "Product8": "Mac\tSecurity Cloud",
+  "Product9": "Mac\tInternet Security",
+  "Product10": "Mac\tVPN Secure Connection",
+  "Product11": "Mac\tPassword Manager",
+  "Product12": "Mac\tKaspersky Safe Kids",
+  "Product13": "Android\tVPN Secure Connection",
+  "Product14": "Android\tInternet Security",
+  "Product15": "Android\tKaspersky Safe Kids",
+  "Product16": "Android\tPassword Manager",
+  "Product17": "iOS\tVPN Secure Connection",
+  "Product18": "iOS\tSecurity Cloud",
+  "Product19": "iOS\tPassword Manager",
+  "Product20": "iOS\tKaspersky Safe Kids"
 }

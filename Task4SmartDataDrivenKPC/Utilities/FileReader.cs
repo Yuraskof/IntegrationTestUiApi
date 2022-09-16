@@ -31,7 +31,7 @@ namespace Task4SmartDataDrivenKPC.Utilities
 
         public static void GetProductInfo(string key)
         {
-            Logger.Info("Got product info");
+            Logger.Info(string.Format("Got {0} info", key));
             string allUserInfo = TestData[key];
             string[] separatedData = allUserInfo.Split("\t");
 

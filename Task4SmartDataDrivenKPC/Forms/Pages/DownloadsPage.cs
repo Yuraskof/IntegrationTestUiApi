@@ -1,6 +1,8 @@
-﻿using Aquality.Selenium.Elements.Interfaces;
+﻿using Aquality.Selenium.Browsers;
+using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
 using OpenQA.Selenium;
+using Task4SmartDataDrivenKPC.Constants;
 
 namespace Task4SmartDataDrivenKPC.Forms.Pages
 {
@@ -35,7 +37,7 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
             if (FindProduct(uniqueText))
             {
                 ILink sendMail = CreateSendToMailLink(sendToMailLink, uniqueText);
-                sendMail.MouseActions.Click();
+                sendMail.WaitAndClick();
             }
         }
 
@@ -59,9 +61,12 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
         {
             ILabel product = CreateProductLabel(productLabel, uniqueText);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < ProjectConstants.MaxCarouselSlidesCount; i++)
             {
-                if (!product.State.IsDisplayed)
+                if (!AqualityServices.ConditionalWait.WaitFor(() => {
+                            return product.State.IsDisplayed;
+                        },
+                        TimeSpan.FromSeconds(ProjectConstants.Timeout), TimeSpan.FromSeconds(ProjectConstants.PollingInterval)))
                 {
                     NextItemsButton.ClickAndWait();
                 }

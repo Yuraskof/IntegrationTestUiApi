@@ -1,8 +1,6 @@
-﻿using Aquality.Selenium.Browsers;
-using Aquality.Selenium.Elements.Interfaces;
+﻿using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
 using OpenQA.Selenium;
-using Task4SmartDataDrivenKPC.Constants;
 
 namespace Task4SmartDataDrivenKPC.Forms.Pages
 {
@@ -10,6 +8,7 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
     {
         private ITextBox UserEmailTextBox => ElementFactory.GetTextBox(By.XPath("//input[@type = \"email\"]"), "User email");
 
+        private ITextBox IncorrectDataMessage => ElementFactory.GetTextBox(By.XPath("//div[contains (@class, \"abtest-signin__error\")]"), "Incorrect data message");
         private ITextBox PasswordTextBox => ElementFactory.GetTextBox(By.XPath("//input[@type = \"password\"]"), "Password");
 
         private IButton LogInSubmitButton => ElementFactory.GetButton(By.XPath("//button[@data-at-selector = \"welcomeSignInBtn\"]"), "Login submit");
@@ -21,17 +20,23 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
 
         public void SetUserEmail(string userName)
         {
-            AqualityServices.ConditionalWait.WaitForTrue(() => {
-                    return UserEmailTextBox.State.IsEnabled;
-                },
-                TimeSpan.FromSeconds(ProjectConstants.Timeout), TimeSpan.FromSeconds(ProjectConstants.PollingInterval),
-                "The email field must be enabled");
-
+            UserEmailTextBox.State.WaitForEnabled();
             UserEmailTextBox.ClearAndType(userName);
         }
 
         public void SetPassword(string userPassword) => PasswordTextBox.ClearAndType(userPassword);
 
-        public void ClickSignInButton() => LogInSubmitButton.WaitAndClick();
+        public void ClickSignInButton()
+        {
+            LogInSubmitButton.State.WaitForEnabled();
+            LogInSubmitButton.Click();
+
+            if (IncorrectDataMessage.State.WaitForNotExist())
+            {
+               return;
+            }
+
+            LogInSubmitButton.Click();
+        }
     }
 }

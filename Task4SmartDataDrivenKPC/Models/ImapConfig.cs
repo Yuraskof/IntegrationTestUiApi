@@ -1,5 +1,4 @@
-﻿
-namespace Task4SmartDataDrivenKPC.Models
+﻿namespace Task4SmartDataDrivenKPC.Models
 {
     public class ImapConfig
     {

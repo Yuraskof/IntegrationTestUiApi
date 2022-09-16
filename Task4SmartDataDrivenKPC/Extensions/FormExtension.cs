@@ -1,7 +1,7 @@
 ﻿using Aquality.Selenium.Forms;
 using NUnit.Framework;
 
-namespace Test.Web.Extensions
+namespace Task4SmartDataDrivenKPC.Extensions
 {
     public static class FormExtensions
     {

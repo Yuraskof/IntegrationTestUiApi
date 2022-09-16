@@ -21,11 +21,8 @@ namespace Task4SmartDataDrivenKPC.Tests
         
 
         [SetUp]
-        public void Setup()
+        public void PrepareForTest()
         {
-            
-            MailClient.GetMessages();
-
             GoToPage(testData.Url);
             SetScreenExpansionMaximize();
             cookiesSteps.CookiesFormIsPresent();
@@ -33,13 +30,13 @@ namespace Task4SmartDataDrivenKPC.Tests
         }
 
         [TearDown]
-        public void AfterEach()
+        public void TearDown()
         {
             AqualityServices.Browser.Quit();
         }
 
         [Test(Description = "TC-0001 Check the letter contain correct link for downloading")]
-        [TestCaseSource("PrepareToTest")]
+        [TestCaseSource(nameof(PrepareToTest))]
         public void TC0001_CheckTheLetterContainCorrectLinkForDownloading(ProductModel model)
         {
             loginOrRegistrationPageSteps.LoginOrRegistrationPageIsPresent();
@@ -50,6 +47,9 @@ namespace Task4SmartDataDrivenKPC.Tests
             downloadsPageSteps.DownloadsPageIsPresent();
             downloadsPageSteps.SelectOs(model.OperatingSystem);
             downloadsPageSteps.OpenSendToMailForm(model.ProductName);
+            downloadsPageSteps.sendEmailSteps.SendEmailFormIsPresent();
+            downloadsPageSteps.sendEmailSteps.SendEmailWithDownloadLink();
+            Assert.IsTrue(MailClient.CheckMessage(model.ProductName), "Message isn't contain download link");
         }
 
         public static IEnumerable<object[]> PrepareToTest()
@@ -59,6 +59,23 @@ namespace Task4SmartDataDrivenKPC.Tests
             yield return new[] { ProductModel.CreateModel("Product1") };
             yield return new[] { ProductModel.CreateModel("Product2") };
             yield return new[] { ProductModel.CreateModel("Product3") };
+            yield return new[] { ProductModel.CreateModel("Product4") };
+            yield return new[] { ProductModel.CreateModel("Product5") };
+            yield return new[] { ProductModel.CreateModel("Product6") };
+            yield return new[] { ProductModel.CreateModel("Product7") };
+            yield return new[] { ProductModel.CreateModel("Product8") };
+            yield return new[] { ProductModel.CreateModel("Product9") };
+            yield return new[] { ProductModel.CreateModel("Product10") };
+            yield return new[] { ProductModel.CreateModel("Product11") };
+            yield return new[] { ProductModel.CreateModel("Product12") };
+            yield return new[] { ProductModel.CreateModel("Product13") };
+            yield return new[] { ProductModel.CreateModel("Product14") };
+            yield return new[] { ProductModel.CreateModel("Product15") };
+            yield return new[] { ProductModel.CreateModel("Product16") };
+            yield return new[] { ProductModel.CreateModel("Product17") };
+            yield return new[] { ProductModel.CreateModel("Product18") };
+            yield return new[] { ProductModel.CreateModel("Product19") };
+            yield return new[] { ProductModel.CreateModel("Product20") };
         }
     }
 }
