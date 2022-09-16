@@ -6,6 +6,7 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
 {
     public class LoginOrRegistrationPage : Form
     {
+        private TimeSpan timeout = TimeSpan.FromSeconds(5);
         private ITextBox UserEmailTextBox => ElementFactory.GetTextBox(By.XPath("//input[@type = \"email\"]"), "User email");
 
         private ITextBox IncorrectDataMessage => ElementFactory.GetTextBox(By.XPath("//div[contains (@class, \"abtest-signin__error\")]"), "Incorrect data message");
@@ -31,12 +32,10 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
             LogInSubmitButton.State.WaitForEnabled();
             LogInSubmitButton.Click();
 
-            if (IncorrectDataMessage.State.WaitForNotExist())
+            if (IncorrectDataMessage.State.WaitForExist(timeout))
             {
-               return;
+                LogInSubmitButton.Click();
             }
-
-            LogInSubmitButton.Click();
         }
     }
 }
