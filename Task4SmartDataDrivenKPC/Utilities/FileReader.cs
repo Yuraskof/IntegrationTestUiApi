@@ -18,7 +18,7 @@ namespace Task4SmartDataDrivenKPC.Utilities
 
             if (TestData.Count == 0)
             {
-                var filePath = ProjectConstants.PathToTestData;
+                var filePath = ProjectConstants.PathToProductsInfo;
                 var json = File.ReadAllText(filePath);
                 var jsonObj = JObject.Parse(json);
 

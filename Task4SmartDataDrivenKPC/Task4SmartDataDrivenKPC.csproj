@@ -16,6 +16,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\TestData\ImapConfig.json" />
+    <None Remove="Resources\TestData\Products.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TestData\ImapConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TestData\Products.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Aquality.Selenium" Version="4.9.0" />
     <PackageReference Include="Humanizer" Version="2.14.1" />
     <PackageReference Include="MailKit" Version="3.4.1" />
@@ -24,6 +38,15 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Models\ImapConfig.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="Models\TestData.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

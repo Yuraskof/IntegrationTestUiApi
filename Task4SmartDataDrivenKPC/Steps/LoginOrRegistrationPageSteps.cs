@@ -1,9 +1,9 @@
 ﻿using Task4SmartDataDrivenKPC.Base;
 using Task4SmartDataDrivenKPC.Constants;
 using Task4SmartDataDrivenKPC.Forms.Pages;
+using Task4SmartDataDrivenKPC.Models;
 using Task4SmartDataDrivenKPC.Utilities;
 using Test.Web.Extensions;
-using Test.Web.Models;
 
 namespace Task4SmartDataDrivenKPC.Steps
 {

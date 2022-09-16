@@ -1,4 +1,4 @@
-﻿namespace Test.Web.Models
+﻿namespace Task4SmartDataDrivenKPC.Models
 {
     public class LoginUser
     {

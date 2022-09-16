@@ -6,15 +6,11 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
 {
     public class DownloadsPage : Form
     {
-        private ILink SendToMailLink => ElementFactory.GetLink(By.XPath("//div[contains (text(), \" Security Cloud \")]//following:: span[contains (text(), \" Send to myself \")][1]"), "Send to mail link");
-
         private IButton NextItemsButton => ElementFactory.GetButton(By.XPath("//div[contains (@class, \"w-carousel__arrow_right\")]//div"), "Show next items button");
 
-        ////div[contains (text(), " Security Cloud ")]//ancestors::   span[contains (text(), " Send to myself ")]
-
-        private static string selectOsButton;
-        private static string sendToMailLink;
-        private static string productLabel;
+        private static string selectOsButton = "//div[@class = \"w-osSelect__list\"]//div[contains (text(), \"{0}\")]";
+        private static string sendToMailLink = "//div[contains (text(), \"{0}\")]//following:: span[contains (text(), \" Send to myself \")][1]";
+        private static string productLabel = "//div[contains (text(), \"{0}\")]";
 
         public DownloadsPage() : base(By.XPath("//div[@class = \"w-osSelect__list\"]"), "Downloads page")
         {

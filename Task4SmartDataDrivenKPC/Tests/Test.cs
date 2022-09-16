@@ -5,7 +5,7 @@ using Task4SmartDataDrivenKPC.Constants;
 using Task4SmartDataDrivenKPC.Models;
 using Task4SmartDataDrivenKPC.Steps;
 using Task4SmartDataDrivenKPC.Utilities;
-using Test.Web.Models;
+
 
 namespace Task4SmartDataDrivenKPC.Tests
 {
@@ -18,13 +18,13 @@ namespace Task4SmartDataDrivenKPC.Tests
         
 
         private readonly TestData testData = FileReader.ReadJsonData<TestData>(ProjectConstants.PathToTestData);
-
+        
 
         [SetUp]
         public void Setup()
         {
             
-            //MailClient.GetMessages();
+            MailClient.GetMessages();
 
             GoToPage(testData.Url);
             SetScreenExpansionMaximize();
@@ -58,6 +58,7 @@ namespace Task4SmartDataDrivenKPC.Tests
             FileReader.GetTestData();
             yield return new[] { ProductModel.CreateModel("Product1") };
             yield return new[] { ProductModel.CreateModel("Product2") };
+            yield return new[] { ProductModel.CreateModel("Product3") };
         }
     }
 }
