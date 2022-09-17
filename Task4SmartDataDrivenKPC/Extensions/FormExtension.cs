@@ -9,5 +9,10 @@ namespace Task4SmartDataDrivenKPC.Extensions
         {
             Assert.IsTrue(form.State.WaitForDisplayed(), $"{form.Name} should be presented");
         }
+
+        public static void AssertIsPresent(this Form form, TimeSpan timeout)
+        {
+            Assert.IsTrue(form.State.WaitForDisplayed(timeout), $"{form.Name} should be presented");
+        }
     }
 }

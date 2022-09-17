@@ -15,7 +15,7 @@ namespace Task4SmartDataDrivenKPC.Tests
         private readonly LoginOrRegistrationPageSteps loginOrRegistrationPageSteps = new LoginOrRegistrationPageSteps();
         private readonly MainNavigationFormSteps mainNavigationFormSteps = new MainNavigationFormSteps();
         private readonly DownloadsPageSteps downloadsPageSteps = new DownloadsPageSteps();
-        
+        private readonly ConfirmationFormSteps confirmationFormSteps = new ConfirmationFormSteps();
 
         private readonly TestData testData = FileReader.ReadJsonData<TestData>(ProjectConstants.PathToTestData);
         
@@ -49,6 +49,7 @@ namespace Task4SmartDataDrivenKPC.Tests
             downloadsPageSteps.OpenSendToMailForm(model.ProductName);
             downloadsPageSteps.sendEmailSteps.SendEmailFormIsPresent();
             downloadsPageSteps.sendEmailSteps.SendEmailWithDownloadLink();
+            confirmationFormSteps.ConfirmationFormFormIsPresent();
             Assert.IsTrue(MailClient.CheckMessage(model.ProductName), "Message isn't contain download link");
         }
 
