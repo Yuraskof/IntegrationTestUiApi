@@ -1,6 +1,6 @@
 {
   "host": "imap.gmail.com",
   "port": "993",
-  "Email": "adressfortests@gmail.com",
-  "MailPassword": "lhimrlazbfsnazzt"
+  "Email": "",
+  "MailPassword": ""
 }
