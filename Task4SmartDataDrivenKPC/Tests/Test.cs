@@ -1,9 +1,9 @@
-using Aquality.Selenium.Browsers;
 using NUnit.Framework;
 using Task4SmartDataDrivenKPC.Base;
 using Task4SmartDataDrivenKPC.Constants;
+using Task4SmartDataDrivenKPC.Forms;
+using Task4SmartDataDrivenKPC.Forms.Pages;
 using Task4SmartDataDrivenKPC.Models;
-using Task4SmartDataDrivenKPC.Steps;
 using Task4SmartDataDrivenKPC.Utilities;
 
 
@@ -11,72 +11,46 @@ namespace Task4SmartDataDrivenKPC.Tests
 {
     public class Test : BaseTest
     {
-        private readonly CookiesFormSteps cookiesSteps = new CookiesFormSteps();
-        private readonly LoginOrRegistrationPageSteps loginOrRegistrationPageSteps = new LoginOrRegistrationPageSteps();
-        private readonly MainNavigationFormSteps mainNavigationFormSteps = new MainNavigationFormSteps();
-        private readonly DownloadsPageSteps downloadsPageSteps = new DownloadsPageSteps();
-        private readonly ConfirmationFormSteps confirmationFormSteps = new ConfirmationFormSteps();
-
-        private readonly TestData testData = FileReader.ReadJsonData<TestData>(ProjectConstants.PathToTestData);
-        
-
-        [SetUp]
-        public void PrepareForTest()
-        {
-            GoToPage(testData.Url);
-            SetScreenExpansionMaximize();
-            cookiesSteps.CookiesFormIsPresent();
-            cookiesSteps.AcceptCookies();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            AqualityServices.Browser.Quit();
-        }
-
         [Test(Description = "TC-0001 Check the letter contain correct link for downloading")]
         [TestCaseSource(nameof(PrepareToTest))]
         public void TC0001_CheckTheLetterContainCorrectLinkForDownloading(ProductModel model)
         {
-            loginOrRegistrationPageSteps.LoginOrRegistrationPageIsPresent();
-            loginOrRegistrationPageSteps.InputCredentionals();
-            loginOrRegistrationPageSteps.ClickLogInButton();
-            mainNavigationFormSteps.MainNavigationFormIsPresent();
-            mainNavigationFormSteps.GoToDownloadsPage();
-            downloadsPageSteps.DownloadsPageIsPresent();
-            downloadsPageSteps.SelectOs(model.OperatingSystem);
-            downloadsPageSteps.OpenSendToMailForm(model.ProductName);
-            downloadsPageSteps.sendEmailSteps.SendEmailFormIsPresent();
-            downloadsPageSteps.sendEmailSteps.SendEmailWithDownloadLink();
-            confirmationFormSteps.ConfirmationFormFormIsPresent();
+            CookiesForm cookiesForm = new CookiesForm();
+            Assert.IsTrue(cookiesForm.State.WaitForDisplayed(), $"{cookiesForm.Name} should be presented");
+            cookiesForm.AcceptCookies();
+
+            LoginOrRegistrationPage loginOrRegistrationPage = new LoginOrRegistrationPage();
+            Assert.IsTrue(loginOrRegistrationPage.State.WaitForDisplayed(), $"{loginOrRegistrationPage.Name} should be presented");
+            loginOrRegistrationPage.PerformAuthorisation();
+            Logger.Info("Step 1 completed.");
+
+            MainNavigationForm mainNavigationForm = new MainNavigationForm();
+            Assert.IsTrue(mainNavigationForm.State.WaitForDisplayed(), $"{mainNavigationForm.Name} should be presented");
+            mainNavigationForm.GoToDownloadsPage();
+            Logger.Info("Step 2 completed.");
+
+            DownloadsPage downloadsPage = new DownloadsPage();
+            Assert.IsTrue(downloadsPage.State.WaitForDisplayed(), $"{downloadsPage.Name} should be presented");
+            downloadsPage.SelectOs(model.OS);
+            downloadsPage.OpenSendToMailForm(model.ProductName);
+            Assert.IsTrue(downloadsPage.sendEmailForm.State.WaitForDisplayed(), $"{downloadsPage.sendEmailForm.Name} should be presented");
+            downloadsPage.sendEmailForm.SendEmail();
+            ConfirmationForm confirmationForm = new ConfirmationForm();
+            Assert.IsTrue(confirmationForm.State.WaitForDisplayed(TimeSpan.FromSeconds(ProjectConstants.TimeoutForForm)), $"{confirmationForm.Name} should be presented");
             Assert.IsTrue(MailClient.CheckMessage(model.ProductName), "Message isn't contain download link");
+            Logger.Info("Step 3 completed.");
         }
 
         public static IEnumerable<object[]> PrepareToTest()
         {
             FileReader.ClearLogFile();
-            FileReader.GetTestData();
-            yield return new[] { ProductModel.CreateModel("Product1") };
-            yield return new[] { ProductModel.CreateModel("Product2") };
-            yield return new[] { ProductModel.CreateModel("Product3") };
-            yield return new[] { ProductModel.CreateModel("Product4") };
-            yield return new[] { ProductModel.CreateModel("Product5") };
-            yield return new[] { ProductModel.CreateModel("Product6") };
-            yield return new[] { ProductModel.CreateModel("Product7") };
-            yield return new[] { ProductModel.CreateModel("Product8") };
-            yield return new[] { ProductModel.CreateModel("Product9") };
-            yield return new[] { ProductModel.CreateModel("Product10") };
-            yield return new[] { ProductModel.CreateModel("Product11") };
-            yield return new[] { ProductModel.CreateModel("Product12") };
-            yield return new[] { ProductModel.CreateModel("Product13") };
-            yield return new[] { ProductModel.CreateModel("Product14") };
-            yield return new[] { ProductModel.CreateModel("Product15") };
-            yield return new[] { ProductModel.CreateModel("Product16") };
-            yield return new[] { ProductModel.CreateModel("Product17") };
-            yield return new[] { ProductModel.CreateModel("Product18") };
-            yield return new[] { ProductModel.CreateModel("Product19") };
-            yield return new[] { ProductModel.CreateModel("Product20") };
+
+            List<ProductModel> modelsList = FileReader.GetModels();
+
+            foreach (var model in modelsList)
+            {
+                yield return new[] { model };
+            }
         }
     }
 }

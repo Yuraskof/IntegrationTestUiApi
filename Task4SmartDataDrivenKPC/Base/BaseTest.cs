@@ -3,6 +3,9 @@ using Aquality.Selenium.Core.Logging;
 using Humanizer;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using Task4SmartDataDrivenKPC.Constants;
+using Task4SmartDataDrivenKPC.Models;
+using Task4SmartDataDrivenKPC.Utilities;
 
 namespace Task4SmartDataDrivenKPC.Base
 {
@@ -12,30 +15,24 @@ namespace Task4SmartDataDrivenKPC.Base
             => TestContext.CurrentContext.Test.Properties.Get("Description")?.ToString()
             ?? TestContext.CurrentContext.Test.Name.Replace("_", string.Empty).Humanize();
 
-        private static Logger Logger => Logger.Instance;
-
+        internal static Logger Logger => AqualityServices.Get<Logger>();
         private TestContext.ResultAdapter Result => TestContext.CurrentContext.Result;
+
+        private readonly TestData testData = FileReader.ReadJsonData<TestData>(ProjectConstants.PathToTestData);
 
         [SetUp]
         public void Setup()
         {
             Logger.Info($"Start scenario [{ScenarioName}]");
+            AqualityServices.Browser.GoTo(testData.Url);
+            AqualityServices.Browser.Maximize();
         }
 
         [TearDown]
         public virtual void AfterEach()
         {
+            AqualityServices.Browser.Quit();
             LogScenarioResult();
-        }
-
-        public void SetScreenExpansionMaximize()
-        {
-            AqualityServices.Browser.Maximize();
-        }
-
-        public void GoToPage(string url)
-        {
-            AqualityServices.Browser.GoTo(url);
         }
 
         private void LogScenarioResult()

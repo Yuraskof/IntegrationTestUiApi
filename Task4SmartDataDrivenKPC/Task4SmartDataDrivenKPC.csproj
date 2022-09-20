@@ -11,8 +11,6 @@
   <ItemGroup>
     <Compile Remove="Forms\HeaderForm.cs" />
     <Compile Remove="Forms\QuickSearchForm.cs" />
-    <Compile Remove="Steps\HeaderFormSteps.cs" />
-    <Compile Remove="Steps\QuickSearchFormSteps.cs" />
   </ItemGroup>
 
   <ItemGroup>

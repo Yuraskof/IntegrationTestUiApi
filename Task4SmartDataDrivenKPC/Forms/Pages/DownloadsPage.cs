@@ -10,61 +10,38 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
     {
         private IButton NextItemsButton => ElementFactory.GetButton(By.XPath("//div[contains (@class, \"w-carousel__arrow_right\")]//div"), "Show next items button");
 
-        private static string selectOsButton = "//div[@class = \"w-osSelect__list\"]//div[contains (text(), \"{0}\")]";
-        private static string sendToMailLink = "//div[contains (text(), \"{0}\")]//following:: span[contains (text(), \" Send to myself \")][1]";
-        private static string productLabel = "//div[contains (text(), \"{0}\")]";
+        ILink SendToMailLink(string productName) => ElementFactory.GetLink(By.XPath(string.Format("//div[contains (text(), \"{0}\")]//ancestor:: div[@class =\"w-downloadProgramCard__logo\"]//following-sibling:: kl-link//span[contains (text(), \"Send to myself\")]", productName)), "Send to mail link");
+
+        IButton SelectOsButton(string os) => ElementFactory.GetButton(By.XPath(string.Format("//div[@class = \"w-osSelect__list\"]//div[contains (text(), \"{0}\")]", os)), "Select Os button");
+
+        ILabel ProductLabel(string productName) => ElementFactory.GetLabel(By.XPath(string.Format("//div[contains (text(), \"{0}\")]", productName)), "Product label");
+
+        
+        public SendEmailForm sendEmailForm = new SendEmailForm();
 
         public DownloadsPage() : base(By.XPath("//div[@class = \"w-osSelect__list\"]"), "Downloads page")
         {
         }
 
-        public void SelectOs(string uniqueText)
+        public void SelectOs(string osName)
         {
-            IButton osButton = CreateSelectOsButton(selectOsButton, uniqueText);
-            osButton.MouseActions.Click();
+            SelectOsButton(osName).MouseActions.Click();
         }
 
-        private IButton CreateSelectOsButton(string locator, string uniqueText)
+        public void OpenSendToMailForm(string productName)
         {
-            locator = string.Format("//div[@class = \"w-osSelect__list\"]//div[contains (text(), \"{0}\")]", uniqueText);
-            By selectOsButtonLocator = By.XPath(locator);
-            IButton element = ElementFactory.GetButton(selectOsButtonLocator, "Select Os button");
-            return element;
-        }
-
-        public void ClickToSendMailLink(string uniqueText)
-        {
-            if (FindProduct(uniqueText))
+            if (FindProduct(productName))
             {
-                ILink sendMail = CreateSendToMailLink(sendToMailLink, uniqueText);
-                sendMail.WaitAndClick();
+                SendToMailLink(productName).WaitAndClick();
             }
         }
 
-        private ILink CreateSendToMailLink(string locator, string uniqueText)
+        private bool FindProduct(string productName)
         {
-            locator = string.Format("//div[contains (text(), \"{0}\")]//following:: span[contains (text(), \" Send to myself \")][1]", uniqueText);
-            By sendToMailLinkLocator = By.XPath(locator);
-            ILink element = ElementFactory.GetLink(sendToMailLinkLocator, "Send to mail link");
-            return element;
-        }
-
-        private ILabel CreateProductLabel(string locator, string uniqueText)
-        {
-            locator = string.Format("//div[contains (text(), \"{0}\")]", uniqueText);
-            By productLabelLocator = By.XPath(locator);
-            ILabel element = ElementFactory.GetLabel(productLabelLocator, "Product label");
-            return element; 
-        }
-
-        private bool FindProduct(string uniqueText)
-        {
-            ILabel product = CreateProductLabel(productLabel, uniqueText);
-
             for (int i = 0; i < ProjectConstants.MaxCarouselSlidesCount; i++)
             {
                 if (!AqualityServices.ConditionalWait.WaitFor(() => {
-                            return product.State.IsDisplayed;
+                            return ProductLabel(productName).State.IsDisplayed;
                         },
                         TimeSpan.FromSeconds(ProjectConstants.Timeout), TimeSpan.FromSeconds(ProjectConstants.PollingInterval)))
                 {

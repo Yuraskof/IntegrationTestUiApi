@@ -1,49 +1,25 @@
-﻿using Aquality.Selenium.Core.Logging;
+﻿using Aquality.Selenium.Browsers;
+using Aquality.Selenium.Core.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Task4SmartDataDrivenKPC.Constants;
+using Task4SmartDataDrivenKPC.Models;
 
 namespace Task4SmartDataDrivenKPC.Utilities
 {
     public static class FileReader
     {
-        public static Dictionary<string, string> TestData = new Dictionary<string, string>();
-        public static Dictionary<string, string> ProductInfo = new Dictionary<string, string>();
-
-        private static Logger Logger => Logger.Instance;
-
-        public static void GetTestData()
+        private static Logger Logger => AqualityServices.Get<Logger>();
+        
+        public static List<ProductModel> GetModels()
         {
-            Logger.Info("Got test data");
+            var json = File.ReadAllText(ProjectConstants.PathToProductsInfo);
+            var jsonObj = JObject.Parse(json);
+            var products = jsonObj["Products"].ToString();
 
-            if (TestData.Count == 0)
-            {
-                var filePath = ProjectConstants.PathToProductsInfo;
-                var json = File.ReadAllText(filePath);
-                var jsonObj = JObject.Parse(json);
+            var modelsList = JsonConvert.DeserializeObject<List<ProductModel>>(products);
 
-                foreach (var element in jsonObj)
-                {
-                    TestData.Add(element.Key, element.Value.ToString());
-                }
-            }
-        }
-
-        public static void GetProductInfo(string key)
-        {
-            Logger.Info(string.Format("Got {0} info", key));
-            string allUserInfo = TestData[key];
-            string[] separatedData = allUserInfo.Split("\t");
-
-            List<string> productInfoFields = new List<string>()
-                { "OperatingSystem", "ProductName"};
-
-            ProductInfo.Clear();
-
-            for (int i = 0; i < separatedData.Length; i++)
-            {
-                ProductInfo.Add(productInfoFields[i], separatedData[i]);
-            }
+            return modelsList;
         }
 
         public static void ClearLogFile()
@@ -57,9 +33,9 @@ namespace Task4SmartDataDrivenKPC.Utilities
             }
         }
 
-
         public static T ReadJsonData<T>(string path)
         {
+            Logger.Info(string.Format("Path {0} deserialized", path));
             return JsonConvert.DeserializeObject<T>(ReadFile(path));
         }
 
@@ -67,6 +43,7 @@ namespace Task4SmartDataDrivenKPC.Utilities
         {
             using (StreamReader sr = new StreamReader(path))
             {
+                Logger.Info(string.Format("File {0} read", path));
                 return sr.ReadToEnd();
             }
         }

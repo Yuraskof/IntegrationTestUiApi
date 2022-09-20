@@ -13,7 +13,7 @@ namespace Task4SmartDataDrivenKPC.Utilities
     public static class MailClient
     {
         private static readonly ImapConfig imapConfig = FileReader.ReadJsonData<ImapConfig>(ProjectConstants.PathToImapConfig);
-        private static Logger Logger => Logger.Instance;
+        private static Logger Logger => AqualityServices.Get<Logger>();
 
         private static bool CheckLinkInMessage(IMailFolder inbox, string productName)
         {

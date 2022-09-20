@@ -1,5 +1,4 @@
-﻿
-namespace Task4SmartDataDrivenKPC.Constants
+﻿namespace Task4SmartDataDrivenKPC.Constants
 {
     public class ProjectConstants
     {
@@ -8,6 +7,8 @@ namespace Task4SmartDataDrivenKPC.Constants
         public const int TimeoutForServer = 20;
         public const double PollingIntervalForServer = 2;
         public const double MaxCarouselSlidesCount = 10;
+        public const int TimeoutForElements = 2;
+        public const int TimeoutForForm = 2;
         public const string PathToLogFile = @"..\..\..\Log\log.log";
         public const string PathToLoginUser = @"Resources\TestData\LoginUser.json";
         public const string PathToTestData = @"Resources\TestData\TestData.json";
