@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+   <TestRunParameters>
+	   <Parameter name="userName" value="" />
+	   <Parameter name="password" value="" />
+	   <Parameter name="emailAdress" value="" />
+	   <Parameter name="mailPassword" value="" />
+   </TestRunParameters>
+</RunSettings>
