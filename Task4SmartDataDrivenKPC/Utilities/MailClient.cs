@@ -6,6 +6,7 @@ using Aquality.Selenium.Browsers;
 using Task4SmartDataDrivenKPC.Constants;
 using Task4SmartDataDrivenKPC.Models;
 using Aquality.Selenium.Core.Logging;
+using NUnit.Framework;
 
 
 namespace Task4SmartDataDrivenKPC.Utilities
@@ -50,6 +51,9 @@ namespace Task4SmartDataDrivenKPC.Utilities
             {
                 Logger.Info("Connected to mail server");
                 client.Connect(imapConfig.host, Convert.ToInt32(imapConfig.port), SecureSocketOptions.SslOnConnect);
+
+                imapConfig.Email = TestContext.Parameters["emailAdress"];
+                imapConfig.MailPassword = TestContext.Parameters["mailPassword"];
 
                 client.Authenticate(imapConfig.Email, imapConfig.MailPassword);
 

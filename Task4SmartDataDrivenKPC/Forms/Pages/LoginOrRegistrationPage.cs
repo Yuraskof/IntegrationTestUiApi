@@ -1,5 +1,6 @@
 ﻿using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Task4SmartDataDrivenKPC.Constants;
 using Task4SmartDataDrivenKPC.Models;
@@ -25,11 +26,16 @@ namespace Task4SmartDataDrivenKPC.Forms.Pages
 
         private void SetUserEmail(string userName)
         {
+            userName = TestContext.Parameters["userName"];
             UserEmailTextBox.State.WaitForEnabled();
             UserEmailTextBox.ClearAndType(userName);
         }
 
-        private void SetPassword(string userPassword) => PasswordTextBox.ClearAndType(userPassword);
+        private void SetPassword(string userPassword)
+        {
+            userPassword = TestContext.Parameters["password"];
+            PasswordTextBox.ClearAndType(userPassword);
+        }
 
         private void ClickSignInButton()
         {

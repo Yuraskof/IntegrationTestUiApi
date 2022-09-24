@@ -7,78 +7,78 @@
     {
       "OS": "Windows",
       "ProductName": "Total Security"
-    },
-    {
-      "OS": "Windows",
-      "ProductName": "Internet Security"
-    },
-    {
-      "OS": "Windows",
-      "ProductName": "Anti-Virus"
-    },
-    {
-      "OS": "Windows",
-      "ProductName": "VPN Secure Connection"
-    },
-    {
-      "OS": "Windows",
-      "ProductName": "Password Manager"
-    },
-    {
-      "OS": "Windows",
-      "ProductName": "Kaspersky Safe Kids"
-    },
-    {
-      "OS": "Mac",
-      "ProductName": "Security Cloud"
-    },
-    {
-      "OS": "Mac",
-      "ProductName": "Internet Security"
-    },
-    {
-      "OS": "Mac",
-      "ProductName": "VPN Secure Connection"
-    },
-    {
-      "OS": "Mac",
-      "ProductName": "Password Manager"
-    },
-    {
-      "OS": "Mac",
-      "ProductName": "Kaspersky Safe Kids"
-    },
-    {
-      "OS": "Android",
-      "ProductName": "Internet Security"
-    },
-    {
-      "OS": "Android",
-      "ProductName": "VPN Secure Connection"
-    },
-    {
-      "OS": "Android",
-      "ProductName": "Password Manager"
-    },
-    {
-      "OS": "Android",
-      "ProductName": "Kaspersky Safe Kids"
-    },
-    {
-      "OS": "iOS",
-      "ProductName": "Security Cloud"
-    },
-    {
-      "OS": "iOS",
-      "ProductName": "VPN Secure Connection"
-    },
-    {
-      "OS": "iOS",
-      "ProductName": "Password Manager"
-    },
-    {
-      "OS": "iOS",
-      "ProductName": "Kaspersky Safe Kids"
     }
+    //{
+    //  "OS": "Windows",
+    //  "ProductName": "Internet Security"
+    //}
+    //{
+    //  "OS": "Windows",
+    //  "ProductName": "Anti-Virus"
+    //},
+    //{
+    //  "OS": "Windows",
+    //  "ProductName": "VPN Secure Connection"
+    //},
+    //{
+    //  "OS": "Windows",
+    //  "ProductName": "Password Manager"
+    //},
+    //{
+    //  "OS": "Windows",
+    //  "ProductName": "Kaspersky Safe Kids"
+    //},
+    //{
+    //  "OS": "Mac",
+    //  "ProductName": "Security Cloud"
+    //},
+    //{
+    //  "OS": "Mac",
+    //  "ProductName": "Internet Security"
+    //},
+    //{
+    //  "OS": "Mac",
+    //  "ProductName": "VPN Secure Connection"
+    //},
+    //{
+    //  "OS": "Mac",
+    //  "ProductName": "Password Manager"
+    //},
+    //{
+    //  "OS": "Mac",
+    //  "ProductName": "Kaspersky Safe Kids"
+    //},
+    //{
+    //  "OS": "Android",
+    //  "ProductName": "Internet Security"
+    //},
+    //{
+    //  "OS": "Android",
+    //  "ProductName": "VPN Secure Connection"
+    //},
+    //{
+    //  "OS": "Android",
+    //  "ProductName": "Password Manager"
+    //},
+    //{
+    //  "OS": "Android",
+    //  "ProductName": "Kaspersky Safe Kids"
+    //},
+    //{
+    //  "OS": "iOS",
+    //  "ProductName": "Security Cloud"
+    //},
+    //{
+    //  "OS": "iOS",
+    //  "ProductName": "VPN Secure Connection"
+    //},
+    //{
+    //  "OS": "iOS",
+    //  "ProductName": "Password Manager"
+    //},
+    //{
+    //  "OS": "iOS",
+    //  "ProductName": "Kaspersky Safe Kids"
+    //}
   ]
 }
